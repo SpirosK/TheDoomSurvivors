@@ -1,0 +1,58 @@
+[gd_scene load_steps=8 format=3 uid="uid://b3blrp7741131"]
+
+[ext_resource type="Script" path="res://weapons/blasts/rocketblast.gd" id="1_k08qy"]
+[ext_resource type="Texture2D" uid="uid://f64dcnuu7w2s" path="res://PNGs/3Weapons/RocketBlast1.png" id="2_70hdj"]
+[ext_resource type="Texture2D" uid="uid://cibdeunfx8e2w" path="res://PNGs/3Weapons/RocketBlast2.png" id="3_lddxp"]
+[ext_resource type="Texture2D" uid="uid://brl53ugwwmseo" path="res://PNGs/3Weapons/RocketBlast3.png" id="4_3ntkb"]
+[ext_resource type="AudioStream" uid="uid://bxfnxckna3r5e" path="res://sfx/blast.wav" id="5_uxehy"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dyhud"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_70hdj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_lddxp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_3ntkb")
+}],
+"loop": false,
+"name": &"blow",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m0yn0"]
+radius = 134.733
+
+[node name="RocketBlast" type="Area2D"]
+show_behind_parent = true
+top_level = true
+rotation = -5.95017
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_k08qy")
+
+[node name="AnimatedRocketBlast" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-1.12501, 2.30475)
+rotation = -0.331613
+scale = Vector2(1.27855, 1.39433)
+sprite_frames = SubResource("SpriteFrames_dyhud")
+animation = &"blow"
+
+[node name="RocketBlastCollision" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
+light_mask = 7
+visibility_layer = 7
+shape = SubResource("CircleShape2D_m0yn0")
+
+[node name="rocket_blast_sound" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("5_uxehy")
+volume_db = -5.0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="animation_finished" from="AnimatedRocketBlast" to="." method="_on_animation_finished"]
+[connection signal="finished" from="rocket_blast_sound" to="." method="_on_sound_finished"]

@@ -1,0 +1,64 @@
+[gd_scene load_steps=9 format=3 uid="uid://cca0q73hcjfim"]
+
+[ext_resource type="Script" path="res://weapons/projectiles/bfg_ball.gd" id="1_uo1py"]
+[ext_resource type="Texture2D" uid="uid://dvj5rw5dtun3t" path="res://PNGs/3Weapons/BFG_ball_dis1.png" id="2_30s0i"]
+[ext_resource type="Texture2D" uid="uid://d17vyxjd84rbd" path="res://PNGs/3Weapons/BFG_ball_dis2.png" id="3_6kolo"]
+[ext_resource type="Texture2D" uid="uid://duyk3j34apcqh" path="res://PNGs/3Weapons/BFG_ball_dis3.png" id="4_td3br"]
+[ext_resource type="Texture2D" uid="uid://caie4npgva5n5" path="res://PNGs/3Weapons/BFGball1.png" id="5_awabn"]
+[ext_resource type="Texture2D" uid="uid://dfhqiq6x7g3bo" path="res://PNGs/3Weapons/BFGball2.png" id="6_kv0yd"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dyhud"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_30s0i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_6kolo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_td3br")
+}],
+"loop": false,
+"name": &"disappear",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_awabn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_kv0yd")
+}],
+"loop": true,
+"name": &"move",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_osoql"]
+radius = 7.94805
+height = 63.8313
+
+[node name="BFG_ball" type="Area2D"]
+show_behind_parent = true
+top_level = true
+rotation = -5.95017
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_uo1py")
+
+[node name="AnimatedBFG_ball" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(2.88161, 0.925155)
+scale = Vector2(1.39465, 1.39433)
+sprite_frames = SubResource("SpriteFrames_dyhud")
+animation = &"disappear"
+
+[node name="BFG_ballCollision" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(3.48897, 0.90944)
+rotation = 1.62316
+shape = SubResource("CapsuleShape2D_osoql")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="animation_finished" from="AnimatedBFG_ball" to="." method="_on_animation_finished"]

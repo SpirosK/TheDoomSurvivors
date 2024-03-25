@@ -1,0 +1,64 @@
+[gd_scene load_steps=10 format=3 uid="uid://06v30hy6sflv"]
+
+[ext_resource type="Script" path="res://weapons/blasts/bfg_blast.gd" id="1_l0gk7"]
+[ext_resource type="Texture2D" uid="uid://bpe4fuke8r0uf" path="res://PNGs/3Weapons/BFG_blast1.png" id="2_t2msa"]
+[ext_resource type="Texture2D" uid="uid://bkr4eojqddp2o" path="res://PNGs/3Weapons/BFG_blast2.png" id="3_f12ut"]
+[ext_resource type="Texture2D" uid="uid://k5f733he2hr1" path="res://PNGs/3Weapons/BFG_blast3.png" id="4_mbec2"]
+[ext_resource type="Texture2D" uid="uid://dptljiqg807ly" path="res://PNGs/3Weapons/BFG_blast4.png" id="5_566nk"]
+[ext_resource type="Texture2D" uid="uid://cj2hf8wljffr8" path="res://PNGs/3Weapons/BFG_blast5.png" id="6_q7ee2"]
+[ext_resource type="AudioStream" uid="uid://dja6caymckoky" path="res://sfx/blast_bfg.wav" id="7_nbl3r"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dyhud"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_t2msa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_f12ut")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_mbec2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_566nk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_q7ee2")
+}],
+"loop": false,
+"name": &"blow",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m0yn0"]
+radius = 424.689
+
+[node name="BFGBlast" type="Area2D"]
+show_behind_parent = true
+top_level = true
+rotation = -5.95017
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_l0gk7")
+
+[node name="AnimatedBFGBlast" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-1.12501, 2.30475)
+rotation = -0.331613
+scale = Vector2(1.27855, 1.39433)
+sprite_frames = SubResource("SpriteFrames_dyhud")
+animation = &"blow"
+
+[node name="BFGBlastCollision" type="CollisionShape2D" parent="."]
+light_mask = 2
+visibility_layer = 2
+shape = SubResource("CircleShape2D_m0yn0")
+
+[node name="BFGBlast_sound" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("7_nbl3r")
+volume_db = -4.0
+
+[connection signal="animation_finished" from="AnimatedBFGBlast" to="." method="_on_animation_finished"]
+[connection signal="finished" from="BFGBlast_sound" to="." method="_on_sound_finished"]

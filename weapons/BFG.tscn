@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://c3j7m7l3p2ua1"]
+
+[ext_resource type="Script" path="res://weapons/BFG.gd" id="1_rxque"]
+[ext_resource type="Texture2D" uid="uid://di1hukejyhpcu" path="res://PNGs/3Weapons/BFG.png" id="2_naq24"]
+[ext_resource type="AudioStream" uid="uid://c67of3b6sjqu3" path="res://sfx/shoot_bfg.wav" id="3_4x35c"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7hrp8"]
+radius = 581.021
+
+[node name="bfg" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_rxque")
+
+[node name="bfg_collision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_7hrp8")
+
+[node name="bfg_pivot" type="Marker2D" parent="."]
+
+[node name="bfg_model" type="Sprite2D" parent="bfg_pivot"]
+position = Vector2(67, -11)
+scale = Vector2(1.4461, 1.4461)
+texture = ExtResource("2_naq24")
+
+[node name="bfg_muzzle" type="Marker2D" parent="bfg_pivot/bfg_model"]
+unique_name_in_owner = true
+position = Vector2(30.5395, 7.18576)
+
+[node name="bfg_timer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 1.2
+autostart = true
+
+[node name="bfg_sound" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_4x35c")
+volume_db = -4.0
+
+[connection signal="timeout" from="bfg_timer" to="." method="_on_timer_timeout"]

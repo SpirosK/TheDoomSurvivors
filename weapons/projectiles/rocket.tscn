@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://bfugigcq02r73"]
+
+[ext_resource type="Script" path="res://weapons/projectiles/rocket.gd" id="1_4usk7"]
+[ext_resource type="Texture2D" uid="uid://c1bxhrdouc5mc" path="res://PNGs/3Weapons/Rocket.png" id="2_r6j46"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dyhud"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_r6j46")
+}],
+"loop": true,
+"name": &"move",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_osoql"]
+radius = 7.94805
+height = 63.8313
+
+[node name="Rocket" type="Area2D"]
+show_behind_parent = true
+top_level = true
+rotation = -5.95017
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_4usk7")
+
+[node name="AnimatedRocket" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(2.88161, 0.925155)
+scale = Vector2(1.39465, 1.39433)
+sprite_frames = SubResource("SpriteFrames_dyhud")
+animation = &"move"
+
+[node name="RocketCollision" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(3.48897, 0.90944)
+rotation = 1.62316
+shape = SubResource("CapsuleShape2D_osoql")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="animation_finished" from="AnimatedRocket" to="." method="_on_animation_finished"]

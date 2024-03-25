@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://cb4mq5e66lcin"]
+
+[ext_resource type="Script" path="res://weapons/pistol.gd" id="1_uibdi"]
+[ext_resource type="Texture2D" uid="uid://dmctlq0stdvxi" path="res://PNGs/3Weapons/pistol.png" id="2_3rdso"]
+[ext_resource type="AudioStream" uid="uid://cikfd1u48grw7" path="res://sfx/shoot_pistol.wav" id="3_p82yp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7hrp8"]
+radius = 581.021
+
+[node name="pistol" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_uibdi")
+
+[node name="pistol_collision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_7hrp8")
+
+[node name="pistol_pivot" type="Marker2D" parent="."]
+
+[node name="Pistol_model" type="Sprite2D" parent="pistol_pivot"]
+position = Vector2(52.949, -4.74999)
+scale = Vector2(0.096831, 0.096831)
+texture = ExtResource("2_3rdso")
+flip_h = true
+
+[node name="pistol_muzzle" type="Marker2D" parent="pistol_pivot/Pistol_model"]
+unique_name_in_owner = true
+position = Vector2(258.709, -54.2183)
+
+[node name="pistol_timer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.3
+autostart = true
+
+[node name="pistol_sound" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_p82yp")
+volume_db = -6.0
+
+[connection signal="timeout" from="pistol_timer" to="." method="_on_timer_timeout"]

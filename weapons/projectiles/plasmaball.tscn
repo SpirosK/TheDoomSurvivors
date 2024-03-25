@@ -1,0 +1,66 @@
+[gd_scene load_steps=10 format=3 uid="uid://bdrlq0lld37yf"]
+
+[ext_resource type="Script" path="res://weapons/projectiles/plasmaball.gd" id="1_nfsy1"]
+[ext_resource type="Texture2D" uid="uid://ctksju2cl2kxy" path="res://PNGs/3Weapons/plasma_blow1.png" id="2_owahj"]
+[ext_resource type="Texture2D" uid="uid://c1wdpd2wdvrim" path="res://PNGs/3Weapons/plasma_blow2.png" id="3_ufb55"]
+[ext_resource type="Texture2D" uid="uid://dxhqowb4qim0u" path="res://PNGs/3Weapons/plasma_blow3.png" id="4_eaugp"]
+[ext_resource type="Texture2D" uid="uid://cqkerfchq6tni" path="res://PNGs/3Weapons/plasma_blow4.png" id="5_hmm7i"]
+[ext_resource type="Texture2D" uid="uid://iqm3blm03gxf" path="res://PNGs/3Weapons/plasma1.png" id="6_0670y"]
+[ext_resource type="Texture2D" uid="uid://ci7jv3wf76r7d" path="res://PNGs/3Weapons/plasma2.png" id="7_dxh8q"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dyhud"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_owahj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ufb55")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_eaugp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_hmm7i")
+}],
+"loop": false,
+"name": &"blow",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_0670y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_dxh8q")
+}],
+"loop": true,
+"name": &"move",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4kjxw"]
+radius = 24.0208
+
+[node name="PlasmaBall" type="Area2D"]
+show_behind_parent = true
+top_level = true
+rotation = -5.95017
+collision_mask = 3
+script = ExtResource("1_nfsy1")
+
+[node name="PlasmaballAnimation" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0.326894, 0.195405)
+scale = Vector2(1.29038, 1.29008)
+sprite_frames = SubResource("SpriteFrames_dyhud")
+animation = &"blow"
+
+[node name="PlasmaballCollision" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(5.68434e-14, -2.13163e-14)
+rotation = 1.22173
+shape = SubResource("CircleShape2D_4kjxw")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="animation_finished" from="PlasmaballAnimation" to="." method="_on_animation_finished"]

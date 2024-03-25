@@ -1,0 +1,88 @@
+[gd_scene load_steps=13 format=3 uid="uid://cki51tsyarhxb"]
+
+[ext_resource type="Script" path="res://characters/Player1/player1.gd" id="1_2rdl7"]
+[ext_resource type="PackedScene" uid="uid://f3y0p3o8isgm" path="res://characters/Player1/doomguy.tscn" id="1_xgmch"]
+[ext_resource type="PackedScene" uid="uid://cb4mq5e66lcin" path="res://weapons/pistol.tscn" id="3_vy1pj"]
+[ext_resource type="PackedScene" uid="uid://5dq48oabhqtj" path="res://weapons/shotgun.tscn" id="4_6mph5"]
+[ext_resource type="PackedScene" uid="uid://bu50gcicr200j" path="res://weapons/mgun.tscn" id="5_bsku2"]
+[ext_resource type="PackedScene" uid="uid://c6nffe5cbt6yb" path="res://weapons/RocketLauncher.tscn" id="6_hs2kp"]
+[ext_resource type="PackedScene" uid="uid://wdaonuh20wuf" path="res://weapons/plasmagun.tscn" id="7_tmihl"]
+[ext_resource type="PackedScene" uid="uid://c3j7m7l3p2ua1" path="res://weapons/BFG.tscn" id="8_3a4xe"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jh1m1"]
+radius = 19.0
+height = 98.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oaele"]
+size = Vector2(69, 110)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_26rbu"]
+bg_color = Color(1, 0.321569, 0.419608, 1)
+corner_radius_top_left = 11
+corner_radius_top_right = 11
+corner_radius_bottom_right = 11
+corner_radius_bottom_left = 11
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mtypu"]
+bg_color = Color(0, 0.709804, 0.462745, 1)
+corner_radius_top_left = 11
+corner_radius_top_right = 11
+corner_radius_bottom_right = 11
+corner_radius_bottom_left = 11
+
+[node name="Player1" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("1_2rdl7")
+
+[node name="DoomGuy" parent="." instance=ExtResource("1_xgmch")]
+unique_name_in_owner = true
+position = Vector2(3, 37)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-8, -3)
+shape = SubResource("CapsuleShape2D_jh1m1")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="weapon_pistol" parent="." instance=ExtResource("3_vy1pj")]
+unique_name_in_owner = true
+position = Vector2(-1, -2)
+
+[node name="weapon_shotgun" parent="." instance=ExtResource("4_6mph5")]
+unique_name_in_owner = true
+position = Vector2(-3, -3)
+
+[node name="weapon_mgun" parent="." instance=ExtResource("5_bsku2")]
+unique_name_in_owner = true
+position = Vector2(-1, -3)
+
+[node name="weapon_rocket" parent="." instance=ExtResource("6_hs2kp")]
+unique_name_in_owner = true
+
+[node name="weapon_plasma" parent="." instance=ExtResource("7_tmihl")]
+unique_name_in_owner = true
+
+[node name="weapon_bfg" parent="." instance=ExtResource("8_3a4xe")]
+unique_name_in_owner = true
+
+[node name="HurtBox" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(-7.5, -2)
+shape = SubResource("RectangleShape2D_oaele")
+debug_color = Color(0.894118, 0.235294, 0.54902, 0.419608)
+
+[node name="PlayerHealthBar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+offset_left = -68.0
+offset_top = -78.0
+offset_right = 51.0
+offset_bottom = -66.0
+theme_override_styles/background = SubResource("StyleBoxFlat_26rbu")
+theme_override_styles/fill = SubResource("StyleBoxFlat_mtypu")
+value = 100.0
+show_percentage = false

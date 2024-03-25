@@ -1,0 +1,60 @@
+[gd_scene load_steps=8 format=3 uid="uid://brrq50fclajv8"]
+
+[ext_resource type="Script" path="res://weapons/enemy_weapons/rocketCyberDemon.gd" id="1_txjtj"]
+[ext_resource type="Texture2D" uid="uid://f64dcnuu7w2s" path="res://PNGs/3Weapons/RocketBlast1.png" id="2_8rjhl"]
+[ext_resource type="Texture2D" uid="uid://cibdeunfx8e2w" path="res://PNGs/3Weapons/RocketBlast2.png" id="3_isxjp"]
+[ext_resource type="Texture2D" uid="uid://brl53ugwwmseo" path="res://PNGs/3Weapons/RocketBlast3.png" id="4_t3d0q"]
+[ext_resource type="Texture2D" uid="uid://c1bxhrdouc5mc" path="res://PNGs/3Weapons/Rocket.png" id="5_emv82"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dyhud"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_8rjhl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_isxjp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_t3d0q")
+}],
+"loop": false,
+"name": &"blow",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_emv82")
+}],
+"loop": true,
+"name": &"move",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pvfgo"]
+radius = 8.0
+height = 50.0
+
+[node name="RocketCD" type="Area2D"]
+show_behind_parent = true
+top_level = true
+collision_mask = 5
+script = ExtResource("1_txjtj")
+
+[node name="AnimatedRocketCD" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(40, 0)
+scale = Vector2(1.12738, 1.33799)
+sprite_frames = SubResource("SpriteFrames_dyhud")
+animation = &"move"
+
+[node name="RocketCDCollision" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
+light_mask = 7
+visibility_layer = 7
+position = Vector2(41, 0)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_pvfgo")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="animation_finished" from="AnimatedRocketCD" to="." method="_on_animation_finished"]

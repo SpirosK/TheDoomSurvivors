@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://5dq48oabhqtj"]
+
+[ext_resource type="Script" path="res://weapons/shotgun.gd" id="1_7oer0"]
+[ext_resource type="Texture2D" uid="uid://dposkat1a1sog" path="res://PNGs/3Weapons/shotgun.png" id="2_6luuf"]
+[ext_resource type="AudioStream" uid="uid://c840vqa48tbk1" path="res://sfx/shoot_shotgun.wav" id="3_n72an"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7hrp8"]
+radius = 581.021
+
+[node name="shotgun" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_7oer0")
+
+[node name="shotgun_collision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_7hrp8")
+
+[node name="shotgun_pivot" type="Marker2D" parent="."]
+
+[node name="shotgun_model" type="Sprite2D" parent="shotgun_pivot"]
+position = Vector2(65.8157, -3.08273)
+scale = Vector2(1.34712, 1.34712)
+texture = ExtResource("2_6luuf")
+
+[node name="shotgun_muzzle" type="Marker2D" parent="shotgun_pivot/shotgun_model"]
+unique_name_in_owner = true
+position = Vector2(31.4267, -3.13529)
+
+[node name="shotgun_timer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.5
+autostart = true
+
+[node name="shotgun_sound" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_n72an")
+volume_db = -6.0
+
+[connection signal="timeout" from="shotgun_timer" to="." method="_on_timer_timeout"]

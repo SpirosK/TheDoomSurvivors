@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://c6nffe5cbt6yb"]
+
+[ext_resource type="Script" path="res://weapons/RocketLauncher.gd" id="1_2xxua"]
+[ext_resource type="Texture2D" uid="uid://cy6r4esab1v55" path="res://PNGs/3Weapons/rocketgun.png" id="2_xtqxa"]
+[ext_resource type="AudioStream" uid="uid://dml5ux41ilob6" path="res://sfx/shoot_rocket.wav" id="3_o3ajs"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7hrp8"]
+radius = 581.021
+
+[node name="rocket_launcher" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_2xxua")
+
+[node name="rocket_launcher_collision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_7hrp8")
+
+[node name="rocket_launcher_pivot" type="Marker2D" parent="."]
+
+[node name="rocket_launcher_model" type="Sprite2D" parent="rocket_launcher_pivot"]
+position = Vector2(63, -3)
+scale = Vector2(1.45766, 1.45766)
+texture = ExtResource("2_xtqxa")
+
+[node name="rocket_launcher_muzzle" type="Marker2D" parent="rocket_launcher_pivot/rocket_launcher_model"]
+unique_name_in_owner = true
+position = Vector2(31.7701, -1.24151)
+
+[node name="rocket_launcher_timer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.8
+autostart = true
+
+[node name="rocket_launcher_sound" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_o3ajs")
+volume_db = -5.0
+
+[connection signal="timeout" from="rocket_launcher_timer" to="." method="_on_timer_timeout"]

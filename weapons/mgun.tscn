@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://bu50gcicr200j"]
+
+[ext_resource type="Script" path="res://weapons/mgun.gd" id="1_mtrmr"]
+[ext_resource type="Texture2D" uid="uid://bc7lskr8l5bn2" path="res://PNGs/3Weapons/mgun.png" id="2_r006b"]
+[ext_resource type="AudioStream" uid="uid://b3js20b1u5f1j" path="res://sfx/shoot_mgun.mp3" id="3_bn84r"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7hrp8"]
+radius = 581.021
+
+[node name="mgun" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_mtrmr")
+
+[node name="mgun_collision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_7hrp8")
+
+[node name="mgun_pivot" type="Marker2D" parent="."]
+
+[node name="mgun_model" type="Sprite2D" parent="mgun_pivot"]
+position = Vector2(47, -1)
+scale = Vector2(1.19166, 1.62267)
+texture = ExtResource("2_r006b")
+
+[node name="mgun_muzzle" type="Marker2D" parent="mgun_pivot/mgun_model"]
+unique_name_in_owner = true
+position = Vector2(28.5, -1.91419)
+
+[node name="mgun_timer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.1
+autostart = true
+
+[node name="mgun_sound" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_bn84r")
+volume_db = -6.0
+
+[connection signal="timeout" from="mgun_timer" to="." method="_on_timer_timeout"]

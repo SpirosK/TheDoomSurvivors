@@ -1,0 +1,226 @@
+[gd_scene load_steps=14 format=3 uid="uid://cojq86hnk0pgm"]
+
+[ext_resource type="Script" path="res://the_game.gd" id="1_kem54"]
+[ext_resource type="PackedScene" uid="uid://cki51tsyarhxb" path="res://characters/Player1/player1.tscn" id="1_wgd1h"]
+[ext_resource type="AudioStream" uid="uid://7akiy2uwa4e5" path="res://music/level1.mp3" id="3_slv45"]
+[ext_resource type="Texture2D" uid="uid://bwnmpotkhjqw0" path="res://PNGs/4Static/INTERPIC.png" id="4_4dmlf"]
+[ext_resource type="Texture2D" uid="uid://b7vvhnhsawbnj" path="res://PNGs/4Static/END0.png" id="4_mbb11"]
+[ext_resource type="Texture2D" uid="uid://d3fjbttdove33" path="res://PNGs/4Static/END1.png" id="5_37iof"]
+[ext_resource type="Texture2D" uid="uid://b5d2foeebuey7" path="res://PNGs/4Static/END2.png" id="6_7y0wv"]
+[ext_resource type="Texture2D" uid="uid://k76vop1t84s5" path="res://PNGs/4Static/END3.png" id="7_spjb2"]
+[ext_resource type="Texture2D" uid="uid://b7lw0nexvr7aa" path="res://PNGs/4Static/END4.png" id="8_haetl"]
+[ext_resource type="Texture2D" uid="uid://b00drmuihc0he" path="res://PNGs/4Static/END5.png" id="9_10ack"]
+[ext_resource type="Texture2D" uid="uid://c1g8wflv3omx2" path="res://PNGs/4Static/END6.png" id="10_aa45x"]
+
+[sub_resource type="Curve2D" id="Curve2D_4bcv6"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -496, -393, 0, 0, 0, 0, 1839.68, -392.005, 0, 0, 0, 0, 1850.03, 870.413, 0, 0, 0, 0, -510, 882, 0, 0, 0, 0, -496, -393)
+}
+point_count = 5
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fabdb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_mbb11")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_37iof")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_7y0wv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_spjb2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_haetl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_10ack")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_aa45x")
+}],
+"loop": true,
+"name": &"the_end",
+"speed": 3.0
+}]
+
+[node name="Game" type="Node2D"]
+y_sort_enabled = true
+position = Vector2(325, 217)
+script = ExtResource("1_kem54")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -30
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.439216, 0.34902, 0, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ColorRect"]
+custom_minimum_size = Vector2(-6.21, 0)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -199.0
+offset_right = 246.0
+offset_bottom = 199.0
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/ColorRect/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/ColorRect/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Bullets  "
+horizontal_alignment = 1
+
+[node name="lbl_bullets" type="Label" parent="CanvasLayer/ColorRect/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/ColorRect/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/ColorRect/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Shells    "
+horizontal_alignment = 1
+
+[node name="lbl_shells" type="Label" parent="CanvasLayer/ColorRect/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="CanvasLayer/ColorRect/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/ColorRect/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+text = "Rockets"
+horizontal_alignment = 1
+
+[node name="lbl_rockets" type="Label" parent="CanvasLayer/ColorRect/VBoxContainer/HBoxContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="CanvasLayer/ColorRect/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/ColorRect/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+text = "Cells      "
+horizontal_alignment = 1
+
+[node name="lbl_cells" type="Label" parent="CanvasLayer/ColorRect/VBoxContainer/HBoxContainer4"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="CanvasLayer/ColorRect/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/ColorRect/VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+text = "BFBs      "
+horizontal_alignment = 1
+
+[node name="lbl_blasts" type="Label" parent="CanvasLayer/ColorRect/VBoxContainer/HBoxContainer5"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+
+[node name="Player1" parent="." instance=ExtResource("1_wgd1h")]
+unique_name_in_owner = true
+position = Vector2(673, 347)
+
+[node name="Path2D" type="Path2D" parent="Player1"]
+position = Vector2(-690.293, -246.842)
+scale = Vector2(0.966088, 1.00549)
+curve = SubResource("Curve2D_4bcv6")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Player1/Path2D"]
+unique_name_in_owner = true
+position = Vector2(-496, -393)
+rotation = 0.000425998
+
+[node name="enemies_killed_label2" type="Label" parent="Player1"]
+unique_name_in_owner = true
+offset_left = 19.0
+offset_top = 33.0
+offset_right = 59.0
+offset_bottom = 56.0
+text = "L1-1:0"
+
+[node name="GameTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+autostart = true
+
+[node name="GameOver" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="GameOver"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.580392)
+
+[node name="Label" type="Label" parent="GameOver/ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -168.0
+offset_top = -83.0
+offset_right = 168.0
+offset_bottom = 83.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 88
+text = "Game Over"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="level_music" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_slv45")
+volume_db = -10.0
+autoplay = true
+
+[node name="TheEnd" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+visible = false
+
+[node name="TextureRect" type="TextureRect" parent="TheEnd"]
+offset_right = 1943.0
+offset_bottom = 1080.0
+texture = ExtResource("4_4dmlf")
+
+[node name="the_end_anim" type="AnimatedSprite2D" parent="TheEnd/TextureRect"]
+unique_name_in_owner = true
+position = Vector2(952, 571)
+scale = Vector2(6.48092, 6.95902)
+sprite_frames = SubResource("SpriteFrames_fabdb")
+animation = &"the_end"
+
+[connection signal="player_died" from="Player1" to="." method="_on_player_1_player_died"]
+[connection signal="timeout" from="GameTimer" to="." method="_on_timer_timeout"]
